@@ -1,0 +1,14 @@
+<div fxLayout="column" fxLayoutAlign="space-around center">
+  <form [formGroup]="form">
+    <mat-form-field class="mw">
+      <mat-label>Consulta de CNJ</mat-label>
+      <input
+        type="text"
+        matInput
+        placeholder="Ex: 5001682-88.2020.8.13.0672"
+        [formControl]="cnj"
+      >
+      <mat-error>Por favor, insira um CNJ válido</mat-error>
+    </mat-form-field>
+  </form>
+</div>
