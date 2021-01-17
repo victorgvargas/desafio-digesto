@@ -30,4 +30,5 @@ export interface Tribproc {
     criadoEm: Date;
     partes: any[][];
     instancia: number;
+    status_op?: string;
 }

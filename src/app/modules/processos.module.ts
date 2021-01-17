@@ -13,7 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTableModule } from '@angular/material/table';
-
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [ConsultaProcessosComponent, ProcessoComponent],
@@ -31,6 +31,7 @@ import { MatTableModule } from '@angular/material/table';
     MatToolbarModule,
     MatDividerModule,
     MatTableModule,
+    MatPaginatorModule,
   ],
   exports: [
     ProcessoComponent,
