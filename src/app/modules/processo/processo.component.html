@@ -3,12 +3,12 @@
   fxLayout="column"
   fxLayoutAlign="space-around center"
 >
-  <h2>{{ processo.numero }}</h2>
+  <h2>Processo Nº: {{ processo.numero }}</h2>
   <mat-divider></mat-divider>
 
   <h3>Instância: {{ processo.instancia }}</h3>
 
-  <table mat-table [dataSource]="movs">
+  <table mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="data">
       <th mat-header-cell *matHeaderCellDef>Data</th>
       <td mat-cell *matCellDef="let mov">{{ mov[0] }}</td>
@@ -27,4 +27,6 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>

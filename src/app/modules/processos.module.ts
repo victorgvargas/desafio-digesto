@@ -14,6 +14,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [ConsultaProcessosComponent, ProcessoComponent],
@@ -32,6 +33,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatDividerModule,
     MatTableModule,
     MatPaginatorModule,
+    MatProgressSpinnerModule,
   ],
   exports: [
     ProcessoComponent,
