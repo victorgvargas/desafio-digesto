@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs';
 import { Tribproc } from './../../shared/models/tribproc.model';
 import { DataService } from './../../shared/services/data-service/data.service';
 import { Component, OnInit } from '@angular/core';
@@ -16,7 +17,7 @@ export class ConsultaProcessosComponent implements OnInit {
   form = this.fb.group({
     cnj: this.cnj,
   });
-  processo: Tribproc;
+  processo$ = new Subject<Tribproc>();
 
   constructor(private fb: FormBuilder, private dataService: DataService) {}
 
@@ -24,8 +25,7 @@ export class ConsultaProcessosComponent implements OnInit {
     this.dataService
       .getProcesso('5001682-88.2020.8.13.0672')
       .subscribe(processo => {
-        this.processo = processo;
-        console.log(processo);
+        this.processo$.next(processo);
       });
   }
 }

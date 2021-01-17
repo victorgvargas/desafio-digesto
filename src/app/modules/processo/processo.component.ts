@@ -1,5 +1,7 @@
 import { Tribproc } from './../../shared/models/tribproc.model';
 import { Component, Input, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { tap, map } from 'rxjs/operators'
 
 @Component({
   selector: 'app-processo',
@@ -7,15 +9,18 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./processo.component.scss']
 })
 export class ProcessoComponent implements OnInit {
-  @Input() processo: Tribproc;
-  displayedColumns = [0,1,2];
+  @Input() processo$: Subject<Tribproc>;
+  processo: Tribproc;
+  movs: any[] = [];
+  displayedColumns = ['data','andamento','texto'];
 
   constructor() { }
 
   ngOnInit(): void {
-    if (this.processo) {
-      this.processo.movs.map(mov => Object.assign({}, mov));
-    }
+    this.processo$.pipe(
+      tap(processo => this.processo = processo),
+      map(processo => processo.movs.map(mov => this.movs.push(Object.assign({}, mov)))),
+    ).subscribe(console.log);
   }
 
 }
