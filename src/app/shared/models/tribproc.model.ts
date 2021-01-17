@@ -1,0 +1,33 @@
+export interface Tribproc {
+    numeroAlternativo: string;
+    anexos: any[][];
+    vara: string;
+    vara_original: string;
+    classeNatureza: string;
+    movs: any[][];
+    distribuicaoTipo: string;
+    situacao: string;
+    juiz?: any;
+    area: string;
+    assuntoExtra: string;
+    audiencias: any[];
+    extinto: number;
+    valor: number;
+    alteradoEm: Date;
+    foro: string;
+    situacao_situacaoID: number;
+    sentencaData?: any;
+    numero: string;
+    comarca: string;
+    tribunalID: number;
+    tribunal: string;
+    processoID: number;
+    distribuicaoData: string;
+    arquivado: boolean;
+    classes: any[];
+    acessos: string[];
+    uf: string;
+    criadoEm: Date;
+    partes: any[][];
+    instancia: number;
+}

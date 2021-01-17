@@ -5,8 +5,8 @@ const routes: Routes = [
   {
     path: 'consulta-processos',
     loadChildren: () =>
-      import('./modules/consulta-processos/consulta-processos.module').then(
-        (m) => m.ConsultaProcessosModule
+      import('./modules/processos.module').then(
+        (m) => m.ProcessosModule
       ),
   },
   {

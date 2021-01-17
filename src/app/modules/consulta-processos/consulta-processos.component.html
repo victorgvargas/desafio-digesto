@@ -1,6 +1,12 @@
+<mat-toolbar class="toolbar">
+  <img src="../../../assets/images/logo.png" alt="Digesto">
+</mat-toolbar>
 <div fxLayout="column" fxLayoutAlign="space-around center">
   <form [formGroup]="form">
     <mat-form-field class="mw">
+      <button type="submit" mat-icon-button matPrefix>
+        <mat-icon class="icon">search</mat-icon>
+      </button>
       <mat-label>Consulta de CNJ</mat-label>
       <input
         type="text"
@@ -11,4 +17,6 @@
       <mat-error>Por favor, insira um CNJ válido</mat-error>
     </mat-form-field>
   </form>
+
+  <app-processo [processo]="processo"></app-processo>
 </div>
