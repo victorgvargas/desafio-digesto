@@ -2,7 +2,7 @@ import { ProcessoService } from './../../shared/services/processo/processo.servi
 import { tap } from 'rxjs/operators';
 import { DataService } from './../../shared/services/data-service/data.service';
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, NgForm, Validators } from '@angular/forms';
 import { CNJ } from '../../shared/models/cnj.model'
 @Component({
   selector: 'app-consulta-processos',
@@ -17,7 +17,8 @@ export class ConsultaProcessosComponent {
   form = this.fb.group({
     cnj: this.cnj,
   });
-  temProcesso: boolean = false;
+  temProcesso = false;
+  jaAcessado = false;
 
   constructor(
     private fb: FormBuilder,
@@ -25,17 +26,21 @@ export class ConsultaProcessosComponent {
     private processoService: ProcessoService,
     ) {}
 
-  onSubmit(value: CNJ): void {
+  onSubmit(value: CNJ, form: NgForm): void {
     this.dataService
       .getProcesso(value.cnj)
       .pipe(
         tap(processo => {
-          if (processo.hasOwnProperty('status_op'))
+          if (processo.hasOwnProperty('status_op')) {
+            this.jaAcessado = true;
             this.temProcesso = false;
+          }
           else {
+            this.jaAcessado = true;
             this.temProcesso = true;
             this.processoService.emiteProcesso(processo);
           }
+          form.resetForm();
         }),
       )
       .subscribe();

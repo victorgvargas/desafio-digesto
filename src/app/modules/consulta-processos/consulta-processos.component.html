@@ -2,7 +2,7 @@
   <img src="../../../assets/images/logo.png" alt="Digesto">
 </mat-toolbar>
 <div fxLayout="column" fxLayoutAlign="space-around center">
-  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+  <form #consultaForm="ngForm" [formGroup]="form" (ngSubmit)="onSubmit(form.value, consultaForm)">
     <mat-form-field class="mw">
       <button
         type="submit"
@@ -24,11 +24,11 @@
   </form>
 
   <app-processo
-    *ngIf="temProcesso; else processoNaoEncontrado"
+    *ngIf="temProcesso"
   >
   </app-processo>
 
-  <ng-template #processoNaoEncontrado>
-    Processo nao encontrado
-  </ng-template>
+  <span *ngIf="!temProcesso && jaAcessado">
+    Processo não encontrado
+  </span>
 </div>

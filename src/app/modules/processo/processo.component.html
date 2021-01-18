@@ -3,30 +3,35 @@
   fxLayout="column"
   fxLayoutAlign="space-around center"
 >
-  <h2>Processo Nº: {{ processo.numero }}</h2>
-  <mat-divider></mat-divider>
+  <app-loading-spinner *ngIf="loading; else notLoading"></app-loading-spinner>
 
-  <h3>Instância: {{ processo.instancia }}</h3>
+  <ng-template #notLoading>
+    <h2>Processo Nº: {{ processo.numero }}</h2>
+    <mat-divider></mat-divider>
 
-  <table mat-table [dataSource]="dataSource">
-    <ng-container matColumnDef="data">
-      <th mat-header-cell *matHeaderCellDef>Data</th>
-      <td mat-cell *matCellDef="let mov">{{ mov[0] }}</td>
-    </ng-container>
+    <h3>Instância: {{ processo.instancia }}</h3>
 
-    <ng-container matColumnDef="andamento">
-      <th mat-header-cell *matHeaderCellDef>Status</th>
-      <td mat-cell *matCellDef="let mov">{{ mov[1] }}</td>
-    </ng-container>
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="data">
+        <th mat-header-cell *matHeaderCellDef>Data</th>
+        <td mat-cell *matCellDef="let mov">{{ mov[0] }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="texto">
-      <th mat-header-cell *matHeaderCellDef>Texto</th>
-      <td mat-cell *matCellDef="let mov">{{ mov[2] }}</td>
-    </ng-container>
+      <ng-container matColumnDef="andamento">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let mov">{{ mov[1] }}</td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+      <ng-container matColumnDef="texto">
+        <th mat-header-cell *matHeaderCellDef>Texto</th>
+        <td mat-cell *matCellDef="let mov">{{ mov[2] }}</td>
+      </ng-container>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </ng-template>
+
 </div>

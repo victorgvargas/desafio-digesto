@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { ProcessoComponent } from './processo/processo.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -23,6 +24,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     ProcessosRoutingModule,
     ReactiveFormsModule,
     FlexLayoutModule,
+    SharedModule,
 
     //Material
     MatFormFieldModule,

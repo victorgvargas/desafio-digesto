@@ -1,7 +1,7 @@
 import { ProcessoService } from './../../shared/services/processo/processo.service';
 import { Tribproc } from './../../shared/models/tribproc.model';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { tap, map, finalize } from 'rxjs/operators';
+import { delay, tap } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 @Component({
@@ -14,27 +14,35 @@ export class ProcessoComponent implements OnInit, AfterViewInit {
   movs = [];
   dataSource = new MatTableDataSource(this.movs);
   displayedColumns = ['data', 'andamento', 'texto'];
-  loading = false;
+  loading: boolean = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private processoService: ProcessoService) {}
+  constructor(
+    private processoService: ProcessoService,
+  ) {}
 
   ngOnInit(): void {
     this.processoService.processo$
       .pipe(
+        tap(() => this.loading = true),
+        delay(300),
         tap((processo) => {
           this.processo = processo;
           this.movs = [];
-        }),
-        map((processo) => {
+
+          let itensProcessados = 0;
           processo.movs.forEach((mov, index) => {
+            itensProcessados++;
             this.movs.push(Object.assign({}, mov));
             this.dataSource.data.push(this.movs[index]);
+            if (itensProcessados === processo.movs.length) {
+              this.loading = false;
+            }
           });
-        })
+        }),
       )
-      .subscribe();
+      .subscribe(() => console.log(this.loading));
   }
 
   ngAfterViewInit(): void {
