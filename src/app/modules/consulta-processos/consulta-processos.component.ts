@@ -1,3 +1,4 @@
+import { LoadingIndicatorService } from './../../shared/services/loading-indicator/loading-indicator.service';
 import { ProcessoService } from './../../shared/services/processo/processo.service';
 import { tap } from 'rxjs/operators';
 import { DataService } from './../../shared/services/data-service/data.service';
@@ -24,9 +25,12 @@ export class ConsultaProcessosComponent {
     private fb: FormBuilder,
     private dataService: DataService,
     private processoService: ProcessoService,
+    private loadingIndicatorService: LoadingIndicatorService,
     ) {}
 
   onSubmit(value: CNJ, form: NgForm): void {
+    this.loadingIndicatorService.setLoading();
+
     this.dataService
       .getProcesso(value.cnj)
       .pipe(

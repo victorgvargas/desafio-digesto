@@ -1,3 +1,4 @@
+import { LoadingIndicatorService } from './../../shared/services/loading-indicator/loading-indicator.service';
 import { ProcessoService } from './../../shared/services/processo/processo.service';
 import { Tribproc } from './../../shared/models/tribproc.model';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
@@ -20,16 +21,18 @@ export class ProcessoComponent implements OnInit, AfterViewInit {
 
   constructor(
     private processoService: ProcessoService,
+    private loadingIndicatorService: LoadingIndicatorService
   ) {}
 
   ngOnInit(): void {
     this.processoService.processo$
       .pipe(
-        tap(() => this.loading = true),
-        delay(300),
         tap((processo) => {
           this.processo = processo;
           this.movs = [];
+          this.loadingIndicatorService.loading$
+          .pipe(tap((loading) => (this.loading = loading)))
+          .subscribe();
 
           let itensProcessados = 0;
           processo.movs.forEach((mov, index) => {
@@ -37,12 +40,12 @@ export class ProcessoComponent implements OnInit, AfterViewInit {
             this.movs.push(Object.assign({}, mov));
             this.dataSource.data.push(this.movs[index]);
             if (itensProcessados === processo.movs.length) {
-              this.loading = false;
+              this.loadingIndicatorService.unsetLoading();
             }
           });
-        }),
+        })
       )
-      .subscribe(() => console.log(this.loading));
+      .subscribe();
   }
 
   ngAfterViewInit(): void {
